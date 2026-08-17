@@ -74,14 +74,31 @@ python skills/leetcode-practice-coach/scripts/record_review.py `
 
 题目可以使用题号、标题或 `titleSlug` 查找。评分范围为 0–3，结果可以是 `passed`、`debugged` 或 `failed`。
 
-安装 skill 后，也可以直接用自然语言使用：
+## 推荐使用流程
+
+第一次使用时，建议把下面这段话直接发送给 Codex：
 
 ```text
-开始今天的 LeetCode 复习
+请使用 leetcode-practice-coach skill。
+如果本地还没有题库，请先初始化官方 Hot100 题库。
+然后生成今天的 LeetCode 复习计划，默认安排 5 道题，并展示每道题的力扣链接。
+计划生成后，从第一道题开始，用渐进式提示引导我思考，不要一开始直接给完整答案。
+```
+
+之后每天可以发送：
+
+```text
+请使用 leetcode-practice-coach，先生成今天的复习计划，再从第一道题开始复习。
 ```
 
 ```text
-记录刚才这道题，继续下一题
+记录刚才这道题的复习结果，并继续今天计划中的下一题。
+```
+
+如果只想调整当天题目数量，可以说：
+
+```text
+请重新生成今天的 LeetCode 复习计划，安排 3 道题，并保留题目链接。
 ```
 
 ## 从官方页面更新 Hot100

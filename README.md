@@ -17,11 +17,14 @@
 
 ## 安装
 
-将仓库中的目录复制到你的 Codex skills 目录：
+最简单的方式是把下面这段话直接发送给 Codex：
 
 ```text
-skills/leetcode-practice-coach/
+请从 https://github.com/Forever0713/leetcode-practice-coach 安装 leetcode-practice-coach skill。
+安装完成后告诉我 skill 的安装位置，并确认它可以用于生成 LeetCode Hot100 复习计划。
 ```
+
+如果需要手动安装，将仓库中的 `skills/leetcode-practice-coach/` 目录复制到 Codex skills 目录。
 
 ## 开始使用
 
@@ -29,8 +32,22 @@ skills/leetcode-practice-coach/
 
 ```powershell
 python skills/leetcode-practice-coach/scripts/init_data.py --preset hot100
-python skills/leetcode-practice-coach/scripts/make_plan.py --count 5
+python skills/leetcode-practice-coach/scripts/make_plan.py
 ```
+
+`make_plan.py` 默认每天安排 5 道题。也可以指定数量：
+
+```powershell
+python skills/leetcode-practice-coach/scripts/make_plan.py --count 3
+```
+
+同一天已经生成过计划时，脚本会复用原计划，保证计划稳定。只有明确需要重新安排时才使用：
+
+```powershell
+python skills/leetcode-practice-coach/scripts/make_plan.py --count 5 --refresh
+```
+
+初始化命令适合第一次使用时运行；如果本地已经有 `data/questions.csv`，不要随意重复使用 `--preset hot100`，以免覆盖现有题目目录。
 
 初始化后会创建：
 
@@ -56,6 +73,16 @@ python skills/leetcode-practice-coach/scripts/record_review.py `
 ```
 
 题目可以使用题号、标题或 `titleSlug` 查找。评分范围为 0–3，结果可以是 `passed`、`debugged` 或 `failed`。
+
+安装 skill 后，也可以直接用自然语言使用：
+
+```text
+开始今天的 LeetCode 复习
+```
+
+```text
+记录刚才这道题，继续下一题
+```
 
 ## 从官方页面更新 Hot100
 

@@ -28,7 +28,9 @@
 
 ## 开始使用
 
-在你的练习项目目录中执行：
+推荐安装后直接在 Codex 对话中使用。第一次说“生成今天的复习计划”时，如果本地还没有题库，Codex 会先初始化官方 Hot100 题库，再生成计划。
+
+如果希望手动管理初始化和计划，也可以在包含 `skills/` 的练习项目根目录中执行：
 
 ```powershell
 python skills/leetcode-practice-coach/scripts/init_data.py --preset hot100
@@ -47,7 +49,7 @@ python skills/leetcode-practice-coach/scripts/make_plan.py --count 3
 python skills/leetcode-practice-coach/scripts/make_plan.py --count 5 --refresh
 ```
 
-初始化命令适合第一次使用时运行；如果本地已经有 `data/questions.csv`，不要随意重复使用 `--preset hot100`，以免覆盖现有题目目录。
+初始化命令只适合第一次使用；如果本地已经有 `data/questions.csv`，不要随意重复使用 `--preset hot100`，以免覆盖现有题目目录。
 
 初始化后会创建：
 
@@ -72,7 +74,16 @@ python skills/leetcode-practice-coach/scripts/record_review.py `
   --blocker none
 ```
 
-题目可以使用题号、标题或 `titleSlug` 查找。评分范围为 0–3，结果可以是 `passed`、`debugged` 或 `failed`。
+题目可以使用题号、标题或 `titleSlug` 查找。评分范围为 0–3：
+
+```text
+0 = 完全不会
+1 = 需要较多提示
+2 = 基本掌握但有小问题
+3 = 可以独立完成并解释
+```
+
+结果可以是 `passed`、`debugged` 或 `failed`。
 
 ## 实际使用流程
 
@@ -98,7 +109,7 @@ skill 会根据本地题库、到期时间、掌握度和历史卡点生成计�
 
 ### 2. 逐题复习
 
-从计划中的第一题开始，skill 会通过一次一个问题的方式引导思考，而不是直接展示答案。你可以先分析思路、写代码，再根据提示逐步修正。
+skill 会先展示题目名称、难度、主题和力扣链接，然后只提出一个针对性的思考问题。它不会一开始展示完整解法。你可以先分析思路、写代码，再根据提示逐步修正。
 
 ### 3. 记录并复习下一题
 
@@ -131,6 +142,16 @@ skill 会总结本次表现，记录复习结果、掌握度、用时和下一�
 ```text
 记录这道题，复习下一题。
 ```
+
+## 导入外部力扣记录
+
+如果使用其他工具获取力扣提交历史，可以将它生成的 JSON/CSV 文件导入：
+
+```powershell
+python skills/leetcode-practice-coach/scripts/import_leetcode.py .\leetcode-export.json
+```
+
+本项目只负责读取和标准化外部文件，不负责登录力扣，也不会要求或保存 Cookie。平台上的“已通过”记录只作为历史背景，不会直接等价为掌握度。
 
 ## 从官方页面更新 Hot100
 
